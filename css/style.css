@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(3, 39, 67);
+    text-align: center;
+}
+
+h1{
+    color: rgb(255, 255, 255);
+    font-size:3.2rem;
+    text-shadow: 0rem 0rem .22rem;
+    /* margin-top: -7rem; */
+}
+
+.typing_section{
+    text-align: center;
+}
+
+#textarea{
+    border: .1rem solid rgb(194, 215, 252);
+    border-radius: 1rem;
+    width: 50rem;
+    height: 15rem;
+    outline: none;
+    padding: 1rem;
+    resize: none;
+    background-color: rgb(194, 215, 252);
+    box-shadow: 0rem 0rem .3rem .03rem rgb(194, 215, 252);
+}
+
+#btn{
+    width: 5.5rem;
+    border-radius: .6rem;
+    background-color: rgb(74, 74, 202);
+    color: white;
+    border: .1rem solid  rgb(3, 3, 91);
+    height: 2.5rem;
+    font-size: 1.3rem;
+    margin: 1rem;
+}
+
+#showSentence, #score{
+    margin: 2rem 0;
+    letter-spacing: .02rem;
+    text-align: center;
+    color: rgb(190, 190, 190);
+    /* transition:  500ms ease-in-out; */
+}
+
+#showSentence{
+    font-size: 1.3rem;
+    margin: 0rem 18rem 0rem 18rem;
+}
+
+#score{
+    font-size: 1.6rem;
+    visibility: hidden;
+}
+
+#instruc{
+    color: rgb(192, 192, 192);
+    font-size: .8rem;
+    margin-top: -0.5rem;
+}
+
+.timer-div{
+    /* width: 100%; */
+    /* text-align: right;
+    display: flex;
+    justify-content: flex-end; */
+    position:fixed;
+    z-index: 3;
+
+    left: 1145px;
+    top: 230px;
+}
+
+.show-time{
+    font-size: 1.4rem;
+    padding: 1.5rem;
+    text-align: right;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: .2rem solid white;
+    background-color: rgb(74, 74, 202);
+    color: white;
+}
