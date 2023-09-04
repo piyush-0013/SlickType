@@ -159,6 +159,7 @@ h1{
         border: .15rem solid white;
     }
     .timer-div{
-        left: 85%;
+        left: 85vw;
+        top: 35vh;
     }
 }
