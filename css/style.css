@@ -52,16 +52,17 @@ h1{
     margin: 2rem 0;
     letter-spacing: .02rem;
     text-align: center;
-    color: rgb(190, 190, 190);
     /* transition:  500ms ease-in-out; */
 }
 
 #showSentence{
+    color: rgb(190, 190, 190);
     font-size: 1.3rem;
     margin: 0rem 18rem 0rem 18rem;
 }
 
 #score{
+    color: white;
     font-size: 1.6rem;
     visibility: hidden;
 }
@@ -79,12 +80,12 @@ h1{
     justify-content: flex-end; */
     position:fixed;
     z-index: 3;
-
-    left: 1145px;
-    top: 230px;
+    visibility: hidden;
+    left: 1138px;
+    top: 250px;
 }
 
-.show-time{
+#show-time{
     font-size: 1.4rem;
     padding: 1.5rem;
     text-align: right;

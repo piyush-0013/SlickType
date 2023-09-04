@@ -3,6 +3,7 @@ const show_sentence = document.querySelector("#showSentence");
 const score = document.querySelector("#score");
 const btn = document.querySelector("#btn");
 const ins = document.querySelector("#instruc");
+const show_time = document.querySelector("#show-time");
 
 let startTime, endTime, totalTime;
 const wordPool = [
@@ -39,6 +40,7 @@ function calcSpeed(totalTime){
 
 function endTyping(){
     btn.innerText = "Start";
+    showTimer();
 
     let date = new Date();
     endTime = date.getTime();
@@ -52,6 +54,22 @@ function endTyping(){
     ins.style.visibility = "visible";
 }
 
+let intervalID, elapsedTime = 0;
+
+function showTimer(){
+    if (btn.innerText === "Done"){
+        intervalID = setInterval(function(){
+            elapsedTime++;
+            show_time.innerHTML = elapsedTime;
+        },1000);
+    }
+    else if (btn.innerText === "Start"){
+        elapsedTime = "";
+        clearInterval(intervalID);
+        show_time.innerHTML = "";
+    }
+}
+
 function startTyping(){
     score.style.visibility = "hidden";
     var sent = "";
@@ -60,15 +78,25 @@ function startTyping(){
         sent += wordPool[randNumber]+" ";
     } 
     show_sentence.innerHTML = sent;
-
-    let date = new Date();
-    startTime = date.getTime();
-
     ins.style.visibility = "hidden";
     btn.innerText = "Done";
+
+    function keydownHandler() {
+        if (btn.innerText === "Done") {
+            let date = new Date();
+            startTime = date.getTime();
+
+            showTimer();
+            typing_ground.removeEventListener('keydown', keydownHandler);
+        }
+    }
+
+    typing_ground.addEventListener('keydown', keydownHandler);
+
 }
 
 btn.addEventListener('click', function(){
+    document.querySelector(".timer-div").style.visibility = "visible";
     switch(btn.innerText.toLowerCase()){
         case "start":
             typing_ground.removeAttribute('disabled');
