@@ -97,7 +97,7 @@ function showTimer() {
 function startTyping() {
     score.style.visibility = "hidden";
     var sent = "";
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 20; i++) {
         var randNumber = Math.floor(Math.random() * poolLen);
         sent += wordPool[randNumber] + " ";
     }
