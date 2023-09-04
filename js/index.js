@@ -18,72 +18,89 @@ const wordPool = [
     'smart', 'stupid', 'serious', 'simple', 'complex', 'could', 'open',
     'during', 'group', 'present', 'line', 'consider', 'life', 'late',
     'school', 'possible', 'become', 'against'
-  ];
-  
+];
+
 var poolLen = wordPool.length;
 
 
-function calcSpeed(totalTime){
+function calcSpeed(totalTime) {
     var typed = typing_ground.value.trim().split(" ");
     var actual = show_sentence.innerHTML.split(" ");
     var count = 0;
 
-    for (var i=0; i<typed.length && i<actual.length; i++){
-        if (typed[i] != actual[i]){
+    for (var i = 0; i < typed.length && i < actual.length; i++) {
+        if (typed[i] != actual[i]) {
             count++;
         }
     }
-    
-    if (typed.length == 1){
+
+    if (typed.length == 1) {
         score.innerHTML = "Speed: 0 WPM <br> Accuracy: 0%";
     }
-    else{
-        var finalSpeed = Math.round((typed.length-count)*60/totalTime);
-        score.innerHTML = "Speed: " + finalSpeed + " WPM <br> Accuracy: " + Math.round(100*(typed.length-count)/typed.length)  + "%";
+    else {
+        var finalSpeed = Math.round((typed.length - count) * 60 / totalTime);
+        score.innerHTML = "Speed: " + finalSpeed + " WPM <br> Accuracy: " + Math.round(100 * (typed.length - count) / typed.length) + "%";
     }
 
     score.style.visibility = "visible";
 }
 
-function endTyping(){
+function endTyping() {
     btn.innerText = "Start";
     showTimer();
 
     let date = new Date();
     endTime = date.getTime();
 
-    totalTime = (endTime-startTime)/1000;
+    totalTime = (endTime - startTime) / 1000;
     // console.log(totalTime);
-    
+
     calcSpeed(totalTime);
 
     typing_ground.value = "";
     ins.style.visibility = "visible";
 }
 
+let intervalID2;
+
+function ender() {
+    document.addEventListener("keydown", function(Event){
+        if (Event.key === " "){
+            console.log("yes");
+            var typed = typing_ground.value.split(" ");
+            var actual = show_sentence.innerHTML.split(" ");
+            
+            if (typed.length >= actual.length-1){
+                btn.click();
+            }
+        }
+    })
+}
+
 let intervalID, elapsedTime = 0;
 
-function showTimer(){
-    if (btn.innerText === "Done"){
-        intervalID = setInterval(function(){
+function showTimer() {
+    if (btn.innerText === "Done") {
+        intervalID = setInterval(function () {
             elapsedTime++;
             show_time.innerHTML = elapsedTime;
-        },1000);
+            ender();
+        }, 1000);
     }
-    else if (btn.innerText === "Start"){
+    else if (btn.innerText === "Start") {
         elapsedTime = "";
         clearInterval(intervalID);
         show_time.innerHTML = "";
     }
 }
 
-function startTyping(){
+function startTyping() {
     score.style.visibility = "hidden";
     var sent = "";
-    for (var i=0; i<25; i++){
-        var randNumber = Math.floor(Math.random()*poolLen);
-        sent += wordPool[randNumber]+" ";
-    } 
+    for (var i = 0; i < 5; i++) {
+        var randNumber = Math.floor(Math.random() * poolLen);
+        sent += wordPool[randNumber] + " ";
+    }
     show_sentence.innerHTML = sent;
     ins.style.visibility = "hidden";
     btn.innerText = "Done";
@@ -94,6 +111,7 @@ function startTyping(){
             startTime = date.getTime();
 
             showTimer();
+            ender();
             typing_ground.removeEventListener('keydown', keydownHandler);
         }
     }
@@ -102,9 +120,9 @@ function startTyping(){
 
 }
 
-btn.addEventListener('click', function(){
+btn.addEventListener('click', function () {
     document.querySelector(".timer-div").style.visibility = "visible";
-    switch(btn.innerText.toLowerCase()){
+    switch (btn.innerText.toLowerCase()) {
         case "start":
             typing_ground.removeAttribute('disabled');
             typing_ground.focus();
@@ -112,14 +130,14 @@ btn.addEventListener('click', function(){
             break;
 
         case "done":
-            typing_ground.setAttribute('disabled','true');
+            typing_ground.setAttribute('disabled', 'true');
             endTyping();
             break;
     }
 });
 
-document.addEventListener('keyup',function (event) {
+document.addEventListener('keyup', function (event) {
     if (event.key === "Enter") {
-       btn.click();
+        btn.click();
     }
 });
