@@ -22,17 +22,24 @@ const wordPool = [
   
 var poolLen = wordPool.length;
 
+
 function calcSpeed(totalTime){
     var typed = typing_ground.value.trim().split(" ");
-    
-    // score.innerHTML = typed.length + "WPM";
+    var actual = show_sentence.innerHTML.split(" ");
+    var count = 0;
+
+    for (var i=0; i<typed.length && i<actual.length; i++){
+        if (typed[i] != actual[i]){
+            count++;
+        }
+    }
     
     if (typed.length == 1){
-        score.innerHTML = "0 WPM";
+        score.innerHTML = "Speed: 0 WPM <br> Accuracy: 0%";
     }
     else{
-        var finalSpeed = Math.round(typed.length*60/totalTime);
-        score.innerHTML = finalSpeed + " WPM";
+        var finalSpeed = Math.round((typed.length-count)*60/totalTime);
+        score.innerHTML = "Speed: " + finalSpeed + " WPM <br> Accuracy: " + Math.round(100*(typed.length-count)/typed.length)  + "%";
     }
 
     score.style.visibility = "visible";
